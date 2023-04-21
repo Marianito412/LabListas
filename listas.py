@@ -58,13 +58,13 @@ def menuDecodificar(pDecodificar):
     )
     opcion = validarEntero(input("Ingrese su elección: "))
     if opcion == 1:
-        return funciones.decodificarAreaYTipo(pDecodificar)
+        return "El material bibliográfico "+funciones.decodificarAreaYTipo(pDecodificar) + "."
     elif opcion == 2:
-        return funciones.decodificarPisoPasillo(pDecodificar)
+        return "El material bibliográfico "+funciones.decodificarPisoPasillo(pDecodificar) + "."
     elif opcion == 3:
-        return funciones.decodificarDetalle(pDecodificar)
+        return "El material bibliográfico "+funciones.decodificarDetalle(pDecodificar) + "."
     elif opcion == 4:
-        ...
+        return "El material bibliográfico "+funciones.decodificarCompleto(pDecodificar) + "."
     elif opcion == 5:
         exit()
 

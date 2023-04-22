@@ -5,6 +5,7 @@
 
 #Importación de bibliotecas
 import re
+import pickle
 
 #Definición de funciones
 def decodificarPisoPasillo(pCodigo):
@@ -55,3 +56,13 @@ def decodificarCompleto(pCodigo):
     -return(str): Información extraida del código dado 
     """
     return f"{decodificarAreaYTipo(pCodigo)}, {decodificarPisoPasillo(pCodigo)}, {decodificarDetalle(pCodigo)}"
+
+def graba(nomArchGrabar,lista):
+    #Función que graba un archivo con una lista de estudiantes
+    try:
+        f=open(nomArchGrabar,"wb")
+        pickle.dump(lista,f)
+        f.close()
+        print("Archivo Guardado!")
+    except:
+        print("Error al grabar el archivo: ", nomArchGrabar)

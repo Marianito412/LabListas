@@ -76,7 +76,7 @@ def validarEntero(pnumero):
         pnumero = input("Ingrese un número: ")
     return pnumero
 
-def menuDecodificar(pDecodificar):
+def menuDecodificar(pDecodificar, pCodigos):
     """
     Funcionalidad: Muestra un menu de opciones para decodificar
     Entradas: NA
@@ -99,6 +99,7 @@ def menuDecodificar(pDecodificar):
     elif opcion == 4:
         return "El material bibliográfico "+funciones.decodificarCompleto(pDecodificar) + "."
     elif opcion == 5:
+        funciones.graba("biblioteca", pCodigos)
         exit()
 
 def menu():
@@ -118,13 +119,11 @@ def menu():
         seguirRegistrando = validarBin(input("Desea ingresar más códigos (si/no)? "))
     
     seguirDecodificando = True
-    print(codigos)
     while seguirDecodificando:
         codigoDecodificar = input("Ingrese el código que desea decodificar: ")
         if validarCodigo(codigoDecodificar):
             if codigoDecodificar in codigos:
-                print(menuDecodificar(codigoDecodificar))
-                
+                print(menuDecodificar(codigoDecodificar, codigos))
             else:
                 print("El código no existe")
         else:

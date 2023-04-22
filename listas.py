@@ -62,7 +62,7 @@ def validarEntero(pnumero):
     while True:
         try:
             pnumero = int(pnumero)
-            if pnumero >=1 and pnumero<=5:
+            if pnumero >=1 and pnumero<=6:
                 break
             else:
                 print("Ingrese un valor positivo")
@@ -87,7 +87,8 @@ def menuDecodificar(pDecodificar, pCodigos):
         "2. Decodificar piso y pasillo".center(53)+"\n"+
         "3. Decodificar detalle".center(46)+"\n"+
         "4. Decodificación completa".center(50)+"\n"+
-        "5. Salir".center(31)
+        "5. Cambiar código".center(42)+"\n"+
+        "6. Salir".center(31)
     )
     print()
     opcion = validarEntero(input("Ingrese su el numero de la opcion a elegir: "))
@@ -101,15 +102,18 @@ def menuDecodificar(pDecodificar, pCodigos):
     elif opcion == 4:
         return "El material bibliográfico "+funciones.decodificarCompleto(pDecodificar) + "."
     elif opcion == 5:
+        return "Se cambiará el código a decodificar"
+    elif opcion == 6:
         funciones.graba("biblioteca", pCodigos)
         print("Gracias por utilizar el programa")
         exit()
 
-def menu():
+def registrarCodigos():
     """
-    Funcionalidad: Solicita información al usuario
+    Funcionalidad: Solicita los códigos a registrar al usuario
     Entradas: NA
-    Salidas: NA
+    Salidas:
+    -codigos(list): Lista de códigos registrados
     """
     seguirRegistrando=True
     codigos = ""
@@ -124,14 +128,27 @@ def menu():
             print()
         seguirRegistrando = validarBin(input("Desea ingresar más códigos (si/no)? "))
     
-    seguirDecodificando = True
     codigos=convertirLista(codigos[1:])
-    while seguirDecodificando:
+    return codigos
+def menu():
+    """
+    Funcionalidad: Solicita información al usuario
+    Entradas: NA
+    Salidas: NA
+    """
+    codigos = registrarCodigos()
+    decodificarNuevo = True
+    while True:
         print()
-        codigoDecodificar = input("Ingrese el código que desea decodificar: ")
+        if decodificarNuevo:
+            codigoDecodificar = input("Ingrese el código que desea decodificar: ")
         if validarCodigo(codigoDecodificar):
             if codigoDecodificar in codigos:
-                print(menuDecodificar(codigoDecodificar, codigos))
+                decodificarNuevo = False
+                salida = menuDecodificar(codigoDecodificar, codigos)
+                if salida == "Se cambiará el código a decodificar":
+                    decodificarNuevo = True
+                print(salida)
             else:
                 print()
                 print("El código no se encontró en los previamente ingresados")
